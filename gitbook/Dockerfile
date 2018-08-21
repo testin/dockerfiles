@@ -1,3 +1,9 @@
-FROM mhart/alpine-node
-RUN npm install gitbook gitbook-cli -d
-RUN ./node_modules/gitbook-cli/bin/gitbook.js alias ./node_modules/gitbook
+FROM node:8-slim
+COPY qshell /usr/local/bin/qshell
+COPY ossutil /usr/local/bin/ossutil
+RUN npm install gitbook gitbook-cli --registry=https://registry.npm.taobao.org -d -g && \
+    rm /usr/local/bin/gitbook && \
+    ln -s /usr/local/lib/node_modules/gitbook-cli/bin/gitbook.js /usr/local/bin/gitbook && \
+    gitbook alias /usr/lib/node_modules/gitbook && \
+    chmod +x /usr/local/bin/qshell && \
+    chmod +x /usr/local/bin/qshell
