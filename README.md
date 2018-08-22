@@ -9,6 +9,8 @@ docker pull testindata/base
 which includes 
 
 - jessie 
+- git
+- ssh
 - node
 - gitbook
 - qshell

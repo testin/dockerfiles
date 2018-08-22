@@ -67,13 +67,12 @@ RUN set -ex \
   && tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/ \
   && ln -s /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn \
   && ln -s /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg \
-  && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz
-
-RUN npm install gitbook gitbook-cli -d -g && \
-    rm /usr/local/bin/gitbook && \
-    ln -s /usr/local/lib/node_modules/gitbook-cli/bin/gitbook.js /usr/local/bin/gitbook && \
-    gitbook alias /usr/lib/node_modules/gitbook && \
-    chmod +x /usr/local/bin/qshell && \
-    chmod +x /usr/local/bin/qshell
+  && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz \
+  && npm install gitbook gitbook-cli -d -g \
+  && rm /usr/local/bin/gitbook \
+  && ln -s /usr/local/lib/node_modules/gitbook-cli/bin/gitbook.js /usr/local/bin/gitbook && \
+  && gitbook alias /usr/lib/node_modules/gitbook \
+  && chmod +x /usr/local/bin/qshell \
+  && chmod +x /usr/local/bin/qshell
 
 CMD [ "node" ]
