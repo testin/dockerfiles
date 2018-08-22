@@ -39,7 +39,7 @@ RUN buildDeps='xz-utils' \
       *) echo "unsupported architecture"; exit 1 ;; \
     esac \
     && set -x \
-    && apt-get update && apt-get install -y ca-certificates curl wget $buildDeps --no-install-recommends \
+    && apt-get update && apt-get install -y ca-certificates git openssh-cli curl wget $buildDeps --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* \
     && curl -fsSLO --compressed "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-$ARCH.tar.xz" \
     && curl -fsSLO --compressed "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
