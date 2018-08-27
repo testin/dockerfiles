@@ -1,4 +1,4 @@
-FROM debian:jessie-slim
+FROM openjdk:8
 
 COPY qshell /usr/local/bin/qshell
 
@@ -48,31 +48,13 @@ RUN buildDeps='xz-utils' \
     && tar -xJf "node-v$NODE_VERSION-linux-$ARCH.tar.xz" -C /usr/local --strip-components=1 --no-same-owner \
     && rm "node-v$NODE_VERSION-linux-$ARCH.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
     && apt-get purge -y --auto-remove $buildDeps \
-    && ln -s /usr/local/bin/node /usr/local/bin/nodejs
-
-ENV YARN_VERSION 1.6.0
-
-RUN set -ex \
-  && for key in \
-    6A010C5166006599AA17F08146C2130DFD2497F5 \
-  ; do \
-    gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "$key" || \
-    gpg --keyserver hkp://ipv4.pool.sks-keyservers.net --recv-keys "$key" || \
-    gpg --keyserver hkp://pgp.mit.edu:80 --recv-keys "$key" ; \
-  done \
-  && curl -fsSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" \
-  && curl -fsSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz.asc" \
-  && gpg --batch --verify yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz \
-  && mkdir -p /opt \
-  && tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/ \
-  && ln -s /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn \
-  && ln -s /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg \
-  && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz \
-  && npm install gitbook gitbook-cli -d -g \
-  && rm /usr/local/bin/gitbook \
-  && ln -s /usr/local/lib/node_modules/gitbook-cli/bin/gitbook.js /usr/local/bin/gitbook \
-  && gitbook alias /usr/lib/node_modules/gitbook \
-  && chmod +x /usr/local/bin/qshell \
-  && chmod +x /usr/local/bin/qshell
-
+    && ln -s /usr/local/bin/node /usr/local/bin/nodejs \
+    && npm install gitbook gitbook-cli -d -g \
+    && rm /usr/local/bin/gitbook \
+    && ln -s /usr/local/lib/node_modules/gitbook-cli/bin/gitbook.js /usr/local/bin/gitbook \
+    && gitbook alias /usr/lib/node_modules/gitbook \
+    && npm config set registry https://registry.npm.taobao.org \
+    && chmod +x /usr/local/bin/qshell \
+    && chmod +x /usr/local/bin/qshell
+    
 CMD [ "node" ]
