@@ -48,7 +48,7 @@ RUN buildDeps='xz-utils' \
     && tar -xJf "node-v$NODE_VERSION-linux-$ARCH.tar.xz" -C /usr/local --strip-components=1 --no-same-owner \
     && rm "node-v$NODE_VERSION-linux-$ARCH.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
     && apt-get purge -y --auto-remove $buildDeps \
-    && ln -s /usr/local/bin/node /usr/local/bin/nodejs
+    && ln -s /usr/local/bin/node /usr/local/bin/nodejs \
     && npm install gitbook gitbook-cli -d -g \
     && rm /usr/local/bin/gitbook \
     && ln -s /usr/local/lib/node_modules/gitbook-cli/bin/gitbook.js /usr/local/bin/gitbook \
