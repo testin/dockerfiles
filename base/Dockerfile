@@ -58,5 +58,5 @@ RUN buildDeps='xz-utils' \
     && npm config set registry https://registry.npm.taobao.org \
     && chmod +x /usr/local/bin/qshell \
     && chmod +x /usr/local/bin/qshell
-    
+   
 CMD [ "node" ]
