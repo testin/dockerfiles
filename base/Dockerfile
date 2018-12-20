@@ -1,7 +1,6 @@
 FROM openjdk:8
-
+COPY sources.list /etc/apt/sources.list
 COPY qshell /usr/local/bin/qshell
-
 COPY ossutil /usr/local/bin/ossutil
 
 RUN groupadd --gid 1000 node \
