@@ -1,6 +1,5 @@
 FROM openjdk:8
 COPY sources.list /etc/apt/sources.list
-COPY qshell /usr/local/bin/qshell
 COPY ossutil /usr/local/bin/ossutil
 
 RUN groupadd --gid 1000 node \
@@ -53,8 +52,6 @@ RUN buildDeps='xz-utils' \
     && rm /usr/local/bin/gitbook \
     && ln -s /usr/local/lib/node_modules/gitbook-cli/bin/gitbook.js /usr/local/bin/gitbook \
     && gitbook alias /usr/local/lib/node_modules/gitbook \
-    && npm config set registry https://registry.npm.taobao.org \
-    && chmod +x /usr/local/bin/qshell \
-    && chmod +x /usr/local/bin/qshell
+    && npm config set registry https://registry.npm.taobao.org
    
 CMD [ "node" ]
