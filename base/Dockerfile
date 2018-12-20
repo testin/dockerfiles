@@ -39,7 +39,7 @@ RUN buildDeps='xz-utils' \
     esac \
     && set -x \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367 \
-    && apt-get update && apt-get install -y ansible ca-certificates git openssh-client curl wget $buildDeps --no-install-recommends \
+    && apt-get update && apt-get install -y ansible python-netaddr ca-certificates git openssh-client curl wget $buildDeps --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* \
     && curl -fsSLO --compressed "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-$ARCH.tar.xz" \
     && curl -fsSLO --compressed "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
